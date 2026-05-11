@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>스마트폰 전용 포트폴리오</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 스타일 초기화 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            background-color: #f0f2f5; 
+            color: #333; 
+            line-height: 1.6;
+        }
+
+        /* 상단 고정 메뉴 */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: #1a73e8;
+            color: #fff;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-menu {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px 5px;
+            list-style: none;
+        }
+        .nav-menu::-webkit-scrollbar { display: none; } /* 스크롤바 숨김 */
+        .nav-menu li { margin: 0 15px; }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        section { padding: 50px 20px; border-bottom: 1px solid #ddd; background: #fff; }
+        h2 { font-size: 1.4rem; margin-bottom: 20px; color: #1a73e8; display: flex; align-items: center; }
+        h2 span { margin-right: 10px; }
+
+        /* 카드 스타일 공통 */
+        .card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #1a73e8;
+        }
+
+        /* 첫번째 섹션: 홈페이지 소개 */
+        #intro .profile-box { text-align: center; margin-bottom: 10px; }
+        #intro p { font-size: 0.95rem; color: #666; }
+
+        /* 두번째 섹션: 기술 스택 리스트 */
+        .tech-list { list-style: none; }
+        .tech-list li {
+            background: #e8f0fe;
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #1967d2;
+        }
+
+        /* 세번째 섹션: 사진 갤러리 (2열 그리드) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #eee;
+        }
+
+        /* 네번째 섹션: AI 및 앱 콘텐츠 */
+        .content-item { margin-bottom: 15px; }
+        .content-item h3 { font-size: 1.1rem; margin-bottom: 5px; }
+        .content-item p { font-size: 0.85rem; color: #555; }
+
+        /* 다섯번째 섹션: SNS 메뉴 */
+        .sns-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .sns-link {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            min-width: 100px;
+            text-align: center;
+        }
+        .sns-blog { background: #03cf5d; } /* 네이버 초록 */
+        .sns-youtube { background: #ff0000; } /* 유튜브 빨강 */
+        .sns-insta { background: #e1306c; } /* 인스타 핑크 */
+        .sns-github { background: #333; } /* 깃허브 블랙 */
+
+        footer { text-align: center; padding: 30px 20px; font-size: 0.8rem; color: #999; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <ul class="nav-menu">
+            <li><a href="#intro">소개</a></li>
+            <li><a href="#tech">기술</a></li>
+            <li><a href="#gallery">갤러리</a></li>
+            <li><a href="#ai">AI/앱</a></li>
+            <li><a href="#sns">SNS</a></li>
+        </ul>
+    </header>
+
+    <section id="intro">
+        <h2><span>🏠</span>홈페이지 소개</h2>
+        <div class="profile-box">
+            <p><strong>모바일 웹 기술 및 AI 콘텐츠 저장소</strong></p>
+            <br>
+            <p>이곳은 최신 웹 표준 기술과 인공지능 앱 개발 정보를 공유하는 스마트폰 전용 공간입니다.</p>
+        </div>
+    </section>
+
+    <section id="tech">
+        <h2><span>💻</span>핵심 웹 기술</h2>
+        <ul class="tech-list">
+           <a href="html/taghtml.html" >
+                    HTML5 - 구조적 설계 및 시맨틱 태그 (연습 예제 보기)
+                </a>
+            <li>CSS3 - 반응형 레이아웃 및 애니메이션</li>
+            <li>JavaScript - 동적 기능 및 데이터 처리</li>
+        </ul>
+    </section>
+
+    <section id="gallery">
+        <h2><span>🖼️</span>갤러리</h2>
+        <div class="gallery-grid">
+            <img src="https://via.placeholder.com/300/e8f0fe/1a73e8?text=Project+1" alt="이미지1">
+            <img src="https://via.placeholder.com/300/e8f0fe/1a73e8?text=Project+2" alt="이미지2">
+            <img src="https://via.placeholder.com/300/e8f0fe/1a73e8?text=Project+3" alt="이미지3">
+            <img src="https://via.placeholder.com/300/e8f0fe/1a73e8?text=Project+4" alt="이미지4">
+        </div>
+    </section>
+
+    <section id="ai">
+        <h2><span>🤖</span>AI & 프로그래밍</h2>
+        <div class="card">
+            <div class="content-item">
+                <h3>AI 콘텐츠</h3>
+                <p>생성형 AI를 활용한 텍스트 및 이미지 생성 기술 분석</p>
+            </div>
+            <div class="content-item">
+                <h3>프로그래밍</h3>
+                <p>Python 및 Java를 활용한 효율적인 알고리즘 구현</p>
+            </div>
+            <div class="content-item">
+                <h3>AI 앱</h3>
+                <p>머신러닝 모델을 탑재한 모바일 애플리케이션 개발</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="sns">
+        <h2><span>📱</span>Social Media</h2>
+        <div class="sns-group">
+            <a href="#" class="sns-link sns-blog">Blog</a>
+            <a href="#" class="sns-link sns-youtube">YouTube</a>
+            <a href="#" class="sns-link sns-insta">Instagram</a>
+            <a href="#" class="sns-link sns-github">GitHub</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 My Mobile Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 부드러운 스크롤 효과
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const headerOffset = 60;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

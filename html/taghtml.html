@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keyword" content="HTML, CSS, Web3D, AI, Computer Security">
+    <meta name="author" content="박경배">
+    <title>통합 수업 및 기술 정보</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 스타일 및 레이아웃 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            background-color: #f5f7fa; 
+            color: #333; 
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+        section { padding: 40px 20px; border-bottom: 1px solid #eee; background: #fff; }
+        h2 { font-size: 1.5rem; margin-bottom: 20px; color: #1a73e8; border-left: 5px solid #1a73e8; padding-left: 10px; }
+        
+        /* 카드 및 테이블 공통 스타일 */
+        .content-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        table, th, td { border: 1px solid #ddd; text-align: center; }
+        th { background-color: #e8f0fe; padding: 10px; }
+        td { padding: 8px; }
+
+        /* 하단 내비게이션 */
+        .bottom-nav {
+            position: fixed; bottom: 0; width: 100%; height: 60px;
+            background: #fff; display: flex; justify-content: space-around;
+            align-items: center; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000;
+        }
+        .bottom-nav a { text-decoration: none; color: #666; font-size: 0.75rem; text-align: center; }
+        .bottom-nav a span { display: block; font-size: 1.2rem; }
+
+        /* 인공지능 섹션 전용 */
+        pre { background: #f9f9f9; padding: 15px; border-radius: 8px; white-space: pre-wrap; font-size: 0.9rem; }
+        .special-char { color: #d93025; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <nav class="bottom-nav">
+        <a href="#security"><span>🛡️</span>보안/AI</a>
+        <a href="#tags"><span>코드</span>태그연습</a>
+        <a href="#class"><span>📚</span>수업</a>
+        <a href="#contact"><span>📞</span>연락처</a>
+    </nav>
+
+    <section id="security">
+        <h2>컴퓨터 보안 및 AI</h2>
+        <div class="content-card">
+            <h3>🛡️ 컴퓨터 보안</h3>
+            <p><strong>보안(Security)</strong>이란 허가되지 않은 접근으로부터 정보를 보호하는 기술입니다. 기밀성, 무결성, 가용성 3대 요소가 핵심입니다.</p>
+        </div>
+        <div class="content-card">
+            <h3 id="ai">🤖 인공지능(AI)이란?</h3>
+            <p>인간의 지능을 기계나 컴퓨터가 모방하는 기술로, 학습, 추론, 자연어 처리 등을 포함합니다.</p>
+            <pre>
+◎ 인공지능의 분류
+- 협의의 AI: 특정 작업 수행 (번역기 등)
+- 범용 AI: 인간 수준의 지능 (개발 중)
+- 초지능 AI: 인간의 능력을 초월
+            </pre>
+            <a href="https://ai.yit.ac.kr" style="color: #1a73e8; text-decoration: none;">🔗 학과 홈페이지 방문</a>
+        </div>
+    </section>
+
+    <section id="tags">
+        <h2>HTML 태그 연습</h2>
+        <div class="content-card">
+            <h3>📊 테이블 예제</h3>
+            <table>
+                <caption>Table1. HTML & Web3D</caption>
+                <tr><th>HTML5</th><th>CSS3</th><th>Web3D</th></tr>
+                <tr><td>Contents</td><td>Design</td><td>Scene</td></tr>
+                <tr><td colspan="2">colspan (열 병합)</td><td rowspan="2">rowspan<br>(행 병합)</td></tr>
+                <tr><td>데이터 1</td><td>데이터 2</td></tr>
+            </table>
+        </div>
+
+        <div class="content-card">
+            <h3>🔣 특수 문자 표시</h3>
+            <p>공백: &nbsp; | 작다: &lt; | 크다: &gt; | 앤드: &amp;</p>
+            <p>저작권: <span class="special-char">&copy;</span> | 등록상표: <span class="special-char">&reg;</span> | 유로: <span class="special-char">&euro;</span></p>
+        </div>
+    </section>
+
+    <section id="class">
+        <h2>내 수업 정보</h2>
+        <div class="content-card" style="background: #e8f0fe;">
+            <ul style="list-style: none;">
+                <li><strong>과목명:</strong> 모바일 보안 실습</li>
+                <li><strong>강의실:</strong> IT 공학관 302호</li>
+                <li><strong>시간:</strong> 매주 화요일 14:00 - 17:00</li>
+                <li><strong>과제:</strong> 스마트폰 보안 설정 리포트</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact" style="text-align: center; background: #333; color: #fff;">
+        <h2>Contact</h2>
+        <p>문의사항은 아래 버튼을 이용해 주세요.</p>
+        <div style="margin: 20px 0;">
+            <a href="tel:010-1234-5678" style="display:inline-block; background:#444; color:#fff; padding:10px 20px; border-radius:30px; text-decoration:none; margin:5px;">📞 전화걸기</a>
+            <a href="mailto:gbpark@yit.ac.kr" style="display:inline-block; background:#444; color:#fff; padding:10px 20px; border-radius:30px; text-decoration:none; margin:5px;">📧 이메일</a>
+        </div>
+        <footer style="font-size: 0.8rem; opacity: 0.7;">
+            <p>&copy; 2024 박경배. All rights reserved.</p>
+        </footer>
+    </section>
+
+    <script>
+        // 부드러운 스크롤 효과
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
