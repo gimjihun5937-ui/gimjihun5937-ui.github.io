@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>폼 태그</p>
+    <form action="text.js" method="post">
+        <label for="fname">이름</label>
+        <input type="text" id="fname" name="gname">
+        <br>
+        <label for="fname">암호</label>
+        <input type="password" id="password" name="password">
+        <br>
+        <label>라디오</label>
+        <input type="radio">
+        <input type="radio">
+        <input type="radio">
+        <br>
+        <label>체크박스</label>
+        <input type="checkbox">
+        <input type="checkbox">
+        <br>
+        <input type="button" value="남성">
+        <input type="button" value="여성">
+        <br><br>
+    </form>
+
+    <form action="server.jsp" method="get">
+        <fieldset>
+            <legend>회원정보</legend>
+            <label for="file">파일선택</label>
+            <input type="file" id="file"><br>
+            <input type="image" id="image" src="" width="40" height="20" alt="전송">
+            <br>
+            <label for="search">찾기</label>
+            <input type="search" id="search">
+            <br>
+            <input type="hidden" id="hidden" value="secretToken">
+            <br>
+        </fieldset>
+    </form>
+
+</body>
+
+</html>
