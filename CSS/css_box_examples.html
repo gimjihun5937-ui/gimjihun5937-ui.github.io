@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS 박스 모델 예제</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #eef0f4;
+    font-size: 13px;
+    color: #1e1e2e;
+  }
+
+  /* ── 페이지 ── */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 12mm;
+    background: #fff;
+    padding: 16mm 18mm 14mm;
+    box-shadow: 0 4px 24px rgba(0,0,0,.13);
+    page-break-after: always;
+  }
+
+  /* ── 공통 제목 ── */
+  .doc-title {
+    font-size: 19px;
+    font-weight: 700;
+    border-left: 5px solid #3b5bdb;
+    padding-left: 10px;
+    margin-bottom: 16px;
+    color: #1e1e2e;
+  }
+  .section-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    background: #3b5bdb;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin: 14px 0 10px;
+    letter-spacing: .3px;
+  }
+
+  /* ── 카드 그리드 ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  .card {
+    border: 1px solid #dee2f0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: #f8f9fd;
+  }
+  .card .lbl {
+    font-size: 11px;
+    font-weight: 700;
+    color: #3b5bdb;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin-bottom: 4px;
+  }
+  .card .desc {
+    font-size: 11.5px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .card .demo {
+    background: #fff;
+    border: 1px solid #e9ecf5;
+    border-radius: 4px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+  }
+  .card .code {
+    margin-top: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 10.5px;
+    background: #eef0f4;
+    border-radius: 3px;
+    padding: 4px 8px;
+    color: #333;
+    word-break: break-all;
+  }
+
+  /* ── 페이지 번호 ── */
+  .page-num {
+    text-align: right;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 12px;
+    border-top: 1px solid #dee2f0;
+    padding-top: 7px;
+  }
+
+  /* ════════════════════════════════
+     PAGE 1 ─ 경계선(border) 예제
+  ════════════════════════════════ */
+
+  /* 기본 스타일 공통 */
+  .b-box {
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 3px;
+    color: #1e1e2e;
+  }
+
+  .b-solid   { border: 3px solid #3b5bdb; }
+  .b-dashed  { border: 3px dashed #e03131; }
+  .b-dotted  { border: 3px dotted #2f9e44; }
+  .b-double  { border: 6px double #f08c00; }
+  .b-groove  { border: 5px groove #9c36b5; }
+  .b-ridge   { border: 5px ridge  #1098ad; }
+  .b-inset   { border: 5px inset  #c2255c; }
+  .b-outset  { border: 5px outset #5c7cfa; }
+  .b-none    { border: none; background:#f1f3f9; }
+  .b-hidden  { border: 3px hidden #aaa; background:#f1f3f9; }
+
+  /* 개별 방향 */
+  .b-top    { border-top:    4px solid #3b5bdb; padding:6px; }
+  .b-right  { border-right:  4px solid #e03131; padding:6px; }
+  .b-bottom { border-bottom: 4px solid #2f9e44; padding:6px; }
+  .b-left   { border-left:   4px solid #f08c00; padding:6px; }
+
+  /* border-radius */
+  .b-radius-sm  { border:2px solid #3b5bdb; border-radius:4px; }
+  .b-radius-md  { border:2px solid #e03131; border-radius:12px; }
+  .b-radius-pill{ border:2px solid #2f9e44; border-radius:50px; }
+  .b-radius-full{ border:2px solid #9c36b5; border-radius:50%;  width:56px; height:56px; display:flex; align-items:center; justify-content:center; margin:0 auto; }
+
+  /* border-color 다중 */
+  .b-multi { border-width:4px; border-style:solid; border-color:#3b5bdb #e03131 #2f9e44 #f08c00; }
+
+  /* ════════════════════════════════
+     PAGE 2 ─ margin / padding 예제
+  ════════════════════════════════ */
+
+  /* margin 시각화 공통 */
+  .mp-wrap {
+    background: #dbe4ff;
+    border: 1px dashed #3b5bdb;
+    border-radius:4px;
+    font-size:11px;
+    color:#3b5bdb;
+    font-weight:600;
+    text-align:center;
+  }
+  .mp-inner {
+    background: #fff;
+    border:1px solid #adb5bd;
+    border-radius:3px;
+    padding:4px 6px;
+    font-size:11px;
+    color:#1e1e2e;
+  }
+
+  .m-all     { margin:16px; }
+  .m-tb      { margin-top:16px; margin-bottom:16px; }
+  .m-lr      { margin-left:20px; margin-right:20px; }
+  .m-top     { margin-top:16px; }
+  .m-right   { margin-right:24px; }
+  .m-bottom  { margin-bottom:16px; }
+  .m-left    { margin-left:24px; }
+  .m-auto    { margin:0 auto; width:70%; }
+  .m-neg     { margin-left:-10px; }
+
+  /* padding 시각화 공통 */
+  .pad-box {
+    background: #fff4e6;
+    border: 2px solid #f08c00;
+    border-radius:4px;
+    color: #1e1e2e;
+    font-size:11px;
+    font-weight:600;
+    text-align:center;
+  }
+  .p-all    { padding:20px; }
+  .p-tb     { padding-top:20px; padding-bottom:20px; }
+  .p-lr     { padding-left:24px; padding-right:24px; }
+  .p-top    { padding-top:20px; }
+  .p-right  { padding-right:24px; }
+  .p-bottom { padding-bottom:20px; }
+  .p-left   { padding-left:24px; }
+  .p-short  { padding:8px 20px; } /* 단축 상하/좌우 */
+  .p-full   { padding:4px 12px 8px 20px; } /* 단축 top/right/bottom/left */
+
+  /* 박스모델 다이어그램 */
+  .bm-diagram {
+    position:relative;
+    text-align:center;
+    font-size:10.5px;
+    font-weight:700;
+  }
+  .bm-margin  { background:#ffe3e3; border:2px dashed #e03131; padding:10px; border-radius:4px; color:#e03131; }
+  .bm-border  { background:#fff9db; border:2px solid #f08c00; padding:8px;  border-radius:3px; color:#f08c00; margin-top:2px;}
+  .bm-padding { background:#d3f9d8; border:2px dashed #2f9e44; padding:8px; border-radius:3px; color:#2f9e44; margin-top:2px;}
+  .bm-content { background:#dbe4ff; border:2px solid #3b5bdb; padding:8px; border-radius:2px; color:#3b5bdb; margin-top:2px;}
+
+  /* ════════════════════════════════
+     PAGE 3 ─ 박스 & 그림자
+  ════════════════════════════════ */
+
+  .sh-box {
+    width:100%;
+    padding:14px;
+    border-radius:6px;
+    background:#fff;
+    font-size:12px;
+    font-weight:600;
+    text-align:center;
+    color:#1e1e2e;
+  }
+
+  /* box-shadow 예제 */
+  .bs-basic   { box-shadow: 4px 4px 8px rgba(0,0,0,.2); }
+  .bs-spread  { box-shadow: 0 4px 16px 4px rgba(59,91,219,.35); }
+  .bs-inset   { box-shadow: inset 0 4px 10px rgba(0,0,0,.2); background:#f8f9fd; }
+  .bs-multi   { box-shadow: 4px 4px 0 #3b5bdb, 8px 8px 0 #e03131; }
+  .bs-neon    { box-shadow: 0 0 8px #3b5bdb, 0 0 20px #5c7cfa, 0 0 40px #748ffc; background:#1e1e2e; color:#fff; }
+  .bs-up      { box-shadow: 0 -6px 12px rgba(59,91,219,.3); }
+  .bs-card    { box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.12); border:1px solid #dee2f0; }
+  .bs-hard    { box-shadow: 6px 6px 0 #1e1e2e; border:2px solid #1e1e2e; }
+  .bs-soft    { box-shadow: 0 20px 40px rgba(0,0,0,.08); border-radius:16px; }
+  .bs-colored { box-shadow: 0 8px 20px rgba(224,49,49,.45); background:#fff5f5; border:1px solid #ffc9c9; }
+
+  @media print {
+    body { background: none; }
+    .page { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ PAGE 1 : 경계선(border) ══════════════ -->
+<div class="page">
+  <div class="doc-title">CSS 경계선(Border) 종류와 예제</div>
+
+  <!-- border-style -->
+  <div class="section-title">① border-style — 선 스타일 8종</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="lbl">solid</div>
+      <div class="desc">가장 기본적인 <b>실선</b>. 버튼·카드 등 범용으로 사용됩니다.</div>
+      <div class="demo"><div class="b-box b-solid">solid</div></div>
+      <div class="code">border: 3px solid #3b5bdb;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">dashed</div>
+      <div class="desc"><b>파선(대시)</b>. 구분선, 드래그 영역, 점선 박스 등에 활용됩니다.</div>
+      <div class="demo"><div class="b-box b-dashed">dashed</div></div>
+      <div class="code">border: 3px dashed #e03131;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">dotted</div>
+      <div class="desc"><b>점선</b>. 아이콘 강조나 링크 밑줄 대체에 자주 사용됩니다.</div>
+      <div class="demo"><div class="b-box b-dotted">dotted</div></div>
+      <div class="code">border: 3px dotted #2f9e44;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">double</div>
+      <div class="desc"><b>이중선</b>. 두께가 충분할 때 두 줄로 표현됩니다.</div>
+      <div class="demo"><div class="b-box b-double">double</div></div>
+      <div class="code">border: 6px double #f08c00;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">groove</div>
+      <div class="desc">마치 <b>파인 홈</b>처럼 입체적으로 보이는 3D 효과 선입니다.</div>
+      <div class="demo"><div class="b-box b-groove">groove</div></div>
+      <div class="code">border: 5px groove #9c36b5;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">ridge / inset / outset</div>
+      <div class="desc"><b>ridge</b>: 돌출 입체선 &nbsp;|&nbsp; <b>inset</b>: 눌린 효과 &nbsp;|&nbsp; <b>outset</b>: 볼록 효과</div>
+      <div class="demo" style="gap:4px;display:flex;flex-direction:column;">
+        <div class="b-box b-ridge" style="font-size:11px;">ridge</div>
+        <div class="b-box b-inset" style="font-size:11px;">inset</div>
+        <div class="b-box b-outset" style="font-size:11px;">outset</div>
+      </div>
+      <div class="code">border: 5px ridge #1098ad;<br>border: 5px inset #c2255c;<br>border: 5px outset #5c7cfa;</div>
+    </div>
+  </div>
+
+  <!-- 개별 방향 -->
+  <div class="section-title">② 개별 방향 border (top / right / bottom / left)</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="desc">네 방향을 <b>각각 다른 색·굵기·스타일</b>로 지정할 수 있습니다.</div>
+      <div class="demo" style="flex-direction:column;gap:4px;">
+        <div class="b-box b-top" style="font-size:11px;">border-top</div>
+        <div class="b-box b-bottom" style="font-size:11px;">border-bottom</div>
+      </div>
+      <div class="code">border-top: 4px solid #3b5bdb;<br>border-bottom: 4px solid #2f9e44;</div>
+    </div>
+    <div class="card">
+      <div class="desc">좌·우 단독 적용 예시와 <b>4방향 각각 다른 색</b> 적용 예시입니다.</div>
+      <div class="demo" style="flex-direction:column;gap:4px;">
+        <div class="b-box b-left" style="font-size:11px;">border-left</div>
+        <div class="b-box b-multi" style="font-size:11px;">4방향 다른 색</div>
+      </div>
+      <div class="code">border-left: 4px solid #f08c00;<br>border-color: #3b5bdb #e03131 #2f9e44 #f08c00;</div>
+    </div>
+  </div>
+
+  <!-- border-radius -->
+  <div class="section-title">③ border-radius — 모서리 둥글기</div>
+  <div class="grid-2" style="margin-bottom:4px;">
+    <div class="card">
+      <div class="lbl">소·중·알약·원형</div>
+      <div class="desc">값이 클수록 더 둥글어지며, <b>50%</b>이면 완전한 원이 됩니다.</div>
+      <div class="demo" style="gap:6px;">
+        <div class="b-box b-radius-sm"  style="font-size:10px;padding:4px 8px;">4px</div>
+        <div class="b-box b-radius-md"  style="font-size:10px;padding:4px 8px;">12px</div>
+        <div class="b-box b-radius-pill"style="font-size:10px;padding:4px 8px;">50px</div>
+        <div class="b-radius-full" style="font-size:10px;">50%</div>
+      </div>
+      <div class="code">border-radius: 4px / 12px / 50px / 50%;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">none / hidden</div>
+      <div class="desc"><b>none</b>은 선 없음, <b>hidden</b>은 공간은 차지하지만 보이지 않습니다.</div>
+      <div class="demo" style="gap:6px;flex-direction:column;">
+        <div class="b-box b-none" style="font-size:11px;">border: none</div>
+        <div class="b-box b-hidden" style="font-size:11px;">border: hidden (공간 유지)</div>
+      </div>
+      <div class="code">border: none;<br>border: 3px hidden #aaa;</div>
+    </div>
+  </div>
+
+  <div class="page-num">— 1 / 3 —</div>
+</div>
+
+
+<!-- ══════════════ PAGE 2 : margin / padding ══════════════ -->
+<div class="page">
+  <div class="doc-title">CSS Margin · Padding 종류와 예제</div>
+
+  <!-- 박스 모델 다이어그램 -->
+  <div class="section-title">① 박스 모델 구조 다이어그램</div>
+  <div style="max-width:320px;margin:0 auto 14px;">
+    <div class="bm-margin">
+      MARGIN (바깥 여백)
+      <div class="bm-border">
+        BORDER (경계선)
+        <div class="bm-padding">
+          PADDING (안쪽 여백)
+          <div class="bm-content">CONTENT (콘텐츠 영역)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- margin -->
+  <div class="section-title">② margin — 요소 바깥 여백 9종</div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="lbl">margin (전체)</div>
+      <div class="desc">4방향 동일 여백. 단축 속성으로 한 번에 지정합니다.</div>
+      <div class="demo">
+        <div class="mp-wrap" style="padding:4px;">
+          <div class="mp-inner m-all">margin:16px</div>
+        </div>
+      </div>
+      <div class="code">margin: 16px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">margin-top / bottom</div>
+      <div class="desc">상·하 방향에만 바깥 여백을 적용합니다.</div>
+      <div class="demo">
+        <div class="mp-wrap" style="padding:4px;">
+          <div class="mp-inner m-tb">상하 16px</div>
+        </div>
+      </div>
+      <div class="code">margin-top:16px;<br>margin-bottom:16px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">margin-left / right</div>
+      <div class="desc">좌·우 방향에만 바깥 여백을 적용합니다.</div>
+      <div class="demo">
+        <div class="mp-wrap" style="padding:4px;">
+          <div class="mp-inner m-lr">좌우 20px</div>
+        </div>
+      </div>
+      <div class="code">margin-left:20px;<br>margin-right:20px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">margin-top 단독</div>
+      <div class="desc">위쪽 여백만 따로 지정합니다.</div>
+      <div class="demo">
+        <div class="mp-wrap" style="padding:4px;">
+          <div class="mp-inner m-top">top only</div>
+        </div>
+      </div>
+      <div class="code">margin-top: 16px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">margin-bottom 단독</div>
+      <div class="desc">아래쪽 여백만 따로 지정합니다.</div>
+      <div class="demo">
+        <div class="mp-wrap" style="padding:4px;">
+          <div class="mp-inner m-bottom">bottom only</div>
+        </div>
+      </div>
+      <div class="code">margin-bottom: 16px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">margin: 0 auto</div>
+      <div class="desc">좌우를 auto로 설정해 <b>수평 중앙 정렬</b>을 만듭니다.</div>
+      <div class="demo">
+        <div class="mp-wrap" style="padding:4px;">
+          <div class="mp-inner m-auto">가운데</div>
+        </div>
+      </div>
+      <div class="code">margin: 0 auto; width:70%;</div>
+    </div>
+  </div>
+
+  <!-- padding -->
+  <div class="section-title">③ padding — 요소 안쪽 여백 9종</div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="lbl">padding (전체)</div>
+      <div class="desc">4방향 동일 안쪽 여백. 콘텐츠와 경계선 사이 공간입니다.</div>
+      <div class="demo"><div class="pad-box p-all">padding:20px</div></div>
+      <div class="code">padding: 20px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">padding 상하 / 좌우</div>
+      <div class="desc">단축 2값: 첫째=상하, 둘째=좌우 여백입니다.</div>
+      <div class="demo"><div class="pad-box p-short">8px 20px</div></div>
+      <div class="code">padding: 8px 20px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">padding 4값 단축</div>
+      <div class="desc">top→right→bottom→left 시계 방향으로 각각 지정합니다.</div>
+      <div class="demo"><div class="pad-box p-full">4 12 8 20px</div></div>
+      <div class="code">padding: 4px 12px 8px 20px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">padding-top</div>
+      <div class="desc">위쪽 안쪽 여백만 지정합니다.</div>
+      <div class="demo"><div class="pad-box p-top">top:20px</div></div>
+      <div class="code">padding-top: 20px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">padding-right</div>
+      <div class="desc">오른쪽 안쪽 여백만 지정합니다.</div>
+      <div class="demo"><div class="pad-box p-right">right:24px</div></div>
+      <div class="code">padding-right: 24px;</div>
+    </div>
+    <div class="card">
+      <div class="lbl">padding-bottom / left</div>
+      <div class="desc">아래·왼쪽 안쪽 여백을 각각 단독으로 지정합니다.</div>
+      <div class="demo" style="flex-direction:column;gap:4px;">
+        <div class="pad-box p-bottom" style="font-size:11px;">bottom:20px</div>
+        <div class="pad-box p-left"   style="font-size:11px;">left:24px</div>
+      </div>
+      <div class="code">padding-bottom:20px;<br>padding-left:24px;</div>
+    </div>
+  </div>
+
+  <!-- margin vs padding 비교표 -->
+  <div class="section-title">④ margin vs padding 비교 요약</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
+    <thead>
+      <tr style="background:#3b5bdb;color:#fff;">
+        <th style="padding:6px 10px;text-align:left;">구분</th>
+        <th style="padding:6px 10px;text-align:left;">위치</th>
+        <th style="padding:6px 10px;text-align:left;">배경색 적용</th>
+        <th style="padding:6px 10px;text-align:left;">음수 사용</th>
+        <th style="padding:6px 10px;text-align:left;">주요 용도</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#f8f9fd;">
+        <td style="padding:5px 10px;border-bottom:1px solid #dee2f0;font-weight:700;">margin</td>
+        <td style="padding:5px 10px;border-bottom:1px solid #dee2f0;">요소 바깥</td>
+        <td style="padding:5px 10px;border-bottom:1px solid #dee2f0;">❌ 투명</td>
+        <td style="padding:5px 10px;border-bottom:1px solid #dee2f0;">✅ 가능</td>
+        <td style="padding:5px 10px;border-bottom:1px solid #dee2f0;">요소 간 간격, 중앙 정렬</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 10px;font-weight:700;">padding</td>
+        <td style="padding:5px 10px;">요소 안쪽</td>
+        <td style="padding:5px 10px;">✅ 적용됨</td>
+        <td style="padding:5px 10px;">❌ 불가</td>
+        <td style="padding:5px 10px;">콘텐츠 여백, 클릭 영역 확장</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-num">— 2 / 3 —</div>
+</div>
+
+
+<!-- ══════════════ PAGE 3 : 박스 & 그림자 ══════════════ -->
+<div class="page">
+  <div class="doc-title">CSS 박스(Box) & 그림자(Shadow) 예제</div>
+
+  <div class="section-title">① box-shadow 기본 구문</div>
+  <div style="background:#eef0f4;border-radius:6px;padding:10px 14px;font-size:12px;font-family:'Courier New',monospace;margin-bottom:14px;color:#1e1e2e;line-height:2;">
+    box-shadow: <span style="color:#3b5bdb;">offset-x</span>
+                <span style="color:#e03131;">offset-y</span>
+                <span style="color:#2f9e44;">blur-radius</span>
+                <span style="color:#f08c00;">spread-radius</span>
+                <span style="color:#9c36b5;">color</span>
+                <span style="color:#1098ad;">[inset]</span>;<br>
+    &nbsp;&nbsp;— offset-x/y: 그림자 위치 &nbsp;|&nbsp; blur: 흐림 정도 &nbsp;|&nbsp; spread: 크기 &nbsp;|&nbsp; inset: 내부 그림자
+  </div>
+
+  <div class="section-title">② box-shadow 예제 10종</div>
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="lbl">기본 그림자</div>
+      <div class="desc">X·Y 4px 오프셋에 8px 블러. 가장 일반적인 카드 그림자입니다.</div>
+      <div class="demo"><div class="sh-box bs-basic">기본 box-shadow</div></div>
+      <div class="code">box-shadow: 4px 4px 8px rgba(0,0,0,.2);</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">spread (확산) 그림자</div>
+      <div class="desc">네 번째 값 <b>spread</b>로 그림자를 사방으로 넓게 퍼뜨립니다.</div>
+      <div class="demo"><div class="sh-box bs-spread">spread 4px</div></div>
+      <div class="code">box-shadow: 0 4px 16px 4px rgba(59,91,219,.35);</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">inset (내부) 그림자</div>
+      <div class="desc"><b>inset</b> 키워드로 그림자가 요소 안쪽에 그려져 눌린 효과를 냅니다.</div>
+      <div class="demo"><div class="sh-box bs-inset">inset shadow</div></div>
+      <div class="code">box-shadow: inset 0 4px 10px rgba(0,0,0,.2);</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">다중 그림자 (multi)</div>
+      <div class="desc">쉼표로 구분해 여러 그림자를 레이어처럼 겹칩니다.</div>
+      <div class="demo"><div class="sh-box bs-multi">다중 그림자</div></div>
+      <div class="code">box-shadow: 4px 4px 0 #3b5bdb, 8px 8px 0 #e03131;</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">네온 글로우 (neon)</div>
+      <div class="desc">blur만 크게 주고 색상에 채도를 높여 네온 발광 효과를 만듭니다.</div>
+      <div class="demo" style="background:#1e1e2e;">
+        <div class="sh-box bs-neon">NEON GLOW</div>
+      </div>
+      <div class="code">box-shadow: 0 0 8px #3b5bdb, 0 0 20px #5c7cfa, 0 0 40px #748ffc;</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">위쪽 그림자 (top)</div>
+      <div class="desc">Y 오프셋을 음수로 설정해 그림자가 요소 위쪽에 생깁니다.</div>
+      <div class="demo"><div class="sh-box bs-up">위쪽 그림자</div></div>
+      <div class="code">box-shadow: 0 -6px 12px rgba(59,91,219,.3);</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">카드 UI 그림자</div>
+      <div class="desc">가까운 그림자(작은 블러)와 먼 그림자(큰 블러)를 합쳐 자연스러운 카드 느낌을 만듭니다.</div>
+      <div class="demo"><div class="sh-box bs-card">Card Shadow</div></div>
+      <div class="code">box-shadow: 0 2px 4px rgba(0,0,0,.08),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 8px 24px rgba(0,0,0,.12);</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">하드 그림자 (브루탈리즘)</div>
+      <div class="desc">blur 없이 오프셋만 주어 딱딱하고 각진 복고풍 그림자를 만듭니다.</div>
+      <div class="demo"><div class="sh-box bs-hard">Hard Shadow</div></div>
+      <div class="code">box-shadow: 6px 6px 0 #1e1e2e;<br>border: 2px solid #1e1e2e;</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">소프트 부유 그림자</div>
+      <div class="desc">offset 0, 큰 blur·spread로 마치 공중에 떠 있는 듯한 부드러운 그림자를 표현합니다.</div>
+      <div class="demo"><div class="sh-box bs-soft">Floating</div></div>
+      <div class="code">box-shadow: 0 20px 40px rgba(0,0,0,.08);<br>border-radius: 16px;</div>
+    </div>
+
+    <div class="card">
+      <div class="lbl">컬러 그림자</div>
+      <div class="desc">그림자 색상에 배경과 같은 계열의 색을 주어 요소가 빛나는 느낌을 연출합니다.</div>
+      <div class="demo"><div class="sh-box bs-colored">Colored Shadow</div></div>
+      <div class="code">box-shadow: 0 8px 20px rgba(224,49,49,.45);<br>background: #fff5f5;</div>
+    </div>
+
+  </div>
+
+  <!-- 요약표 -->
+  <div class="section-title">③ box-shadow 값 요약</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
+    <thead>
+      <tr style="background:#3b5bdb;color:#fff;">
+        <th style="padding:5px 8px;text-align:left;">값</th>
+        <th style="padding:5px 8px;text-align:left;">의미</th>
+        <th style="padding:5px 8px;text-align:left;">기본값</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#f8f9fd;"><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">offset-x</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">가로 방향 이동 (+오른쪽 / -왼쪽)</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">0</td></tr>
+      <tr><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">offset-y</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">세로 방향 이동 (+아래 / -위)</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">0</td></tr>
+      <tr style="background:#f8f9fd;"><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">blur-radius</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">흐림 정도 (클수록 부드럽게)</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">0</td></tr>
+      <tr><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">spread-radius</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">그림자 크기 확대/축소</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">0</td></tr>
+      <tr style="background:#f8f9fd;"><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">color</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">그림자 색상 (rgba 권장)</td><td style="padding:4px 8px;border-bottom:1px solid #dee2f0;">currentColor</td></tr>
+      <tr><td style="padding:4px 8px;">inset</td><td style="padding:4px 8px;">키워드 추가 시 내부 그림자로 전환</td><td style="padding:4px 8px;">없음(외부)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-num">— 3 / 3 —</div>
+</div>
+
+</body>
+</html>
