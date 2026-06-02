@@ -63,11 +63,21 @@
         .tech-list li {
             background: #e8f0fe;
             margin-bottom: 8px;
-            padding: 10px 15px;
             border-radius: 30px;
             font-size: 0.9rem;
             font-weight: bold;
+            overflow: hidden; /* 링크 영역이 둥근 모서리를 벗어나지 않도록 설정 */
+        }
+        /* 리스트 내부의 링크를 버튼처럼 꽉 차게 만듭니다 */
+        .tech-list a {
+            display: block;
+            padding: 10px 15px;
             color: #1967d2;
+            text-decoration: none;
+        }
+        /* 클릭 효과 (터치 시 피드백) */
+        .tech-list a:active {
+            background-color: #d2e3fc;
         }
 
         /* 세번째 섹션: 사진 갤러리 (2열 그리드) */
@@ -132,11 +142,15 @@
     <section id="tech">
         <h2><span>💻</span>핵심 웹 기술</h2>
         <ul class="tech-list">
-           <a href="html/taghtml.html" >
-                    HTML5 - 구조적 설계 및 시맨틱 태그 (연습 예제 보기)
-                </a>
-            <li>CSS3 - 반응형 레이아웃 및 애니메이션</li>
-            <li>JavaScript - 동적 기능 및 데이터 처리</li>
+            <li>
+                <a href="html/taghtml.html">HTML5 - 구조적 설계 및 시맨틱 태그 (연습 예제 보기)</a>
+            </li>
+            <li>
+                <a href="html/css_responsive.html">CSS3 - 반응형 레이아웃 및 애니메이션 (연습 예제 보기)</a>
+            </li>
+            <li>
+                <a href="#">JavaScript - 동적 기능 및 데이터 처리</a>
+            </li>
         </ul>
     </section>
 
@@ -179,7 +193,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 My Mobile Portfolio. All rights reserved.</p>
+        <p>&copy; 2026 My Mobile Portfolio. All rights reserved.</p>
     </footer>
 
     <script>
@@ -188,7 +202,11 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
+                if (targetId === '#') return; // 빈 링크(#)일 때는 스크롤 방지
+                
                 const targetElement = document.querySelector(targetId);
+                if (!targetElement) return;
+
                 const headerOffset = 60;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
